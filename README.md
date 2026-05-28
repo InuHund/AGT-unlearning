@@ -2,60 +2,88 @@
 
 # $AGT^{AO}$: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality
 
-<a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
-<a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd"></a>
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![arXiv](https://img.shields.io/badge/arXiv-2602-b31b1b.svg)](https://arxiv.org/)
-[![Venue](https://img.shields.io/badge/Venue-ACL%202026%20Submission-blue)](https://aclweb.org)
+<p>
+  <a href="https://www.python.org/downloads/"><img alt="Python" src="https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white"></a>
+  <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white"></a>
+  <a href="https://huggingface.co/"><img alt="HuggingFace" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Transformers-yellow"></a>
+  <a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd"></a>
+  <a href="https://opensource.org/licenses/MIT"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+  <a href="https://arxiv.org/abs/2602.01703"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2602.01703-b31b1b.svg?logo=arxiv"></a>
+  <a href="https://2026.aclweb.org/"><img alt="Venue" src="https://img.shields.io/badge/ACL%202026-Findings-1f77b4?logo=googlescholar&logoColor=white"></a>
+</p>
 
-[**Paper**](https://arxiv.org/) | [**Website**](#) | [**Data**](#-data-preparation) | [**Citation**](#-citation)
+<p>
+  <a href="https://arxiv.org/abs/2602.01703"><b>📄 Paper</b></a> &nbsp;|&nbsp;
+  <a href="https://arxiv.org/pdf/2602.01703v1"><b>📥 PDF</b></a> &nbsp;|&nbsp;
+  <a href="#-data-preparation"><b>📦 Data</b></a> &nbsp;|&nbsp;
+  <a href="#-experimental-results"><b>📊 Results</b></a> &nbsp;|&nbsp;
+  <a href="#-citation"><b>✍️ Citation</b></a>
+</p>
+
+<p>
+  <em>Official PyTorch implementation of our <b>ACL 2026 Findings</b> paper.</em>
+</p>
 
 </div>
 
 ---
 
+> [!IMPORTANT]
+> 🎉 **News (May 2026):** Our paper has been **accepted to the Findings of ACL 2026**! Many thanks to our co-authors, reviewers, and the open-source community.
 
 ## 📖 Abstract
 
-This repository contains the official implementation for the paper: **"$AGT^{AO}$: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality"**
+This repository contains the official implementation of our **ACL 2026 Findings** paper:
+**"$AGT^{AO}$: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality."**
 
-$AGT^{AO}$ is a novel unlearning framework that simultaneously addresses **catastrophic forgetting** and **superficial forgetting** (hidden knowledge recovery). It achieves State-of-the-Art (SOTA) performance on TOFU, MUSE, and WMDP benchmarks.
+$AGT^{AO}$ is a novel LLM unlearning framework that simultaneously tackles two long-standing challenges:
 
-<figure style="text-align: center;">
-  <img src="arc.png" alt="arc" width="100%">
-  <figcaption>Figure 1: Overview of the $AGT^{AO}$ framework.</figcaption>
-  </figure>
+- **Catastrophic forgetting** — collateral damage to retained knowledge and general utility.
+- **Superficial forgetting** — hidden knowledge recovery under adversarial probing.
+
+It achieves **state-of-the-art (SOTA)** performance on **TOFU**, **MUSE**, and **WMDP** benchmarks, while maintaining model utility and fluency.
+
+<div align="center">
+  <img src="arc.png" alt="AGT-AO Architecture" width="92%">
+  <p><sub><b>Figure 1.</b> Overview of the $AGT^{AO}$ framework.</sub></p>
+</div>
 
 ## 🔥 News
-- **[2026/02]** Code and arxiv paper released.
-- **[2026/01]** Paper submitted to ACL 2026.
+
+- **`[2026/05]`** 🎉 Our paper is **accepted to the Findings of ACL 2026**!
+- **`[2026/02]`** 📦 Code and arXiv preprint released.
+- **`[2026/01]`** 📝 Paper submitted to ACL 2026.
 
 ## 🚀 Key Features
 
-  * **🛡️ Adversarial Gating Training (AGT):** A min-max game in the latent space that generates worst-case perturbations to ensure deep erasure and prevent adversarial recovery.
-  * **⚖️ Adaptive Orthogonality (AO):** A dynamic regularization term that projects forget gradients orthogonally to retain gradients only when conflicts occur, preserving model utility.
-  * **📈 Gradient-Norm-Based Gating (GBG):** A curriculum-learning inspired mechanism that stabilizes the adversarial training process
-  <figure style="text-align: center;">
-  <img src="GBG.png" alt="GBG" width="60%">
-  <figcaption>Figure 2: Overview of the Gradient-Norm-Based Gating.</figcaption>
-  </figure>
+- **🛡️ Adversarial Gating Training (AGT)** — A min-max game in the latent space that injects worst-case perturbations, ensuring *deep erasure* and resisting adversarial knowledge recovery.
+- **⚖️ Adaptive Orthogonality (AO)** — A dynamic regularizer that projects forget gradients orthogonally to retain gradients *only when they conflict*, preserving model utility without sacrificing forgetting strength.
+- **📈 Gradient-Norm-Based Gating (GBG)** — A curriculum-inspired gating mechanism that stabilizes adversarial training and avoids early-stage collapse.
+- **🧪 Comprehensive Benchmarks** — Evaluated on **TOFU**, **MUSE**, and **WMDP** with multiple base LLMs (LLaMA-2, Gemma, Zephyr, ICLM).
+
+<div align="center">
+  <img src="GBG.png" alt="Gradient-Norm-Based Gating" width="62%">
+  <p><sub><b>Figure 2.</b> Overview of the Gradient-Norm-Based Gating (GBG) mechanism.</sub></p>
+</div>
 
 ## 🛠️ Installation
 
 We recommend using `Conda` to manage the environment.
 
 ```bash
-conda create -n agt python=3.10
+# 1. Create and activate the environment
+conda create -n agt python=3.10 -y
 conda activate agt
 
-# Install PyTorch (Adjust cuda version according to your driver)
+# 2. Install PyTorch (adjust CUDA version to match your driver)
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-# Install dependencies
+# 3. Install project dependencies
 pip install -r requirements.txt
 ```
 
-**Requirements (`requirements.txt`):**
+<details>
+<summary><b>📋 Core dependencies (<code>requirements.txt</code>)</b></summary>
 
 ```text
 transformers>=4.30.0
@@ -63,37 +91,40 @@ peft>=0.4.0
 datasets
 accelerate
 scipy
-hydra-core  # For configuration management
-wandb       # For logging
+hydra-core   # configuration management
+wandb        # experiment logging
 ```
+
+</details>
 
 ## 📂 Data Preparation
 
-The code supports three major unlearning benchmarks:
+We support three major LLM-unlearning benchmarks:
 
-1.  **TOFU (Task of Fictitious Unlearning):** Fictional author biographies.
-2.  **MUSE:** News and Books for copyright unlearning.
-3.  **WMDP:** Cybersecurity and hazardous knowledge.
+| Benchmark | Domain | Description |
+|:----------|:-------|:------------|
+| **TOFU**  | Fictional Authors | Task of Fictitious Unlearning — synthetic author biographies. |
+| **MUSE**  | News & Books      | Copyright unlearning on real-world text corpora. |
+| **WMDP**  | Hazardous Knowledge | Cybersecurity / bio / chemistry safety unlearning. |
 
-Please download the datasets and place them in the `./data` folder.
+Download the datasets and arrange them as follows:
 
-```bash
-# Example structure
+```text
 data/
-  ├── tofu/
-  ├── muse/
-  └── wmdp/
+├── tofu/
+├── muse/
+└── wmdp/
 ```
 
 ## 🏃 Quick Start
 
-### 1\. Model Configuration
+### 1. Supported Models
 
-Supported models include `Llama-2-7b-chat`, `Gemma-2b-it`, `Zephyr-7b-beta`, and `ICLM-7b`.
+`Llama-2-7b-chat` · `Gemma-2b-it` · `Zephyr-7b-beta` · `ICLM-7b`
 
-### 2\. Running $AGT^{AO}$
+### 2. Running $AGT^{AO}$
 
-To replicate the main results (e.g., on TOFU with Llama-2-7b), run the following command. The hyperparameters are set according to Appendix A.3.
+Reproduce the main TOFU results with `Llama-2-7b-chat` (hyperparameters follow Appendix A.3):
 
 ```bash
 python baselines/unlearn.py \
@@ -111,83 +142,112 @@ python baselines/unlearn.py \
     --inner_loop_steps 4
 ```
 
-### 3\. Hyperparameters
+### 3. Key Hyperparameters
 
-Key hyperparameters for $AGT^{AO}$ reproduction:
-
-  * **Learning Rate:** `1e-4`
-  * **Batch Size:** `1`
-  * **AO Parameter ($\gamma$):** `1`
-  * **Gradient Threshold** : $\tau_{grad} = \rho \cdot \left\| \nabla \mathcal{L}_{N_{\text{warmup}}} \right\|_2$
-  * **Warm-up Steps ($N_{warm\_up}$):** `1 epoch`
-  * **Perturbation Layer:** `10` (The "Semantic Entry" layer)
-  * **Inner Loop Steps:** `4`(derive from our ablation study)
+| Hyperparameter | Value / Definition | Notes |
+|:---------------|:-------------------|:------|
+| Learning rate | `1e-4` | AdamW |
+| Batch size | `1` (× 8 grad-accum) | Effective batch = 8 |
+| AO parameter $\gamma$ | `1` | Cosine-conflict exponent |
+| Gradient threshold $\tau_{\text{grad}}$ | $\rho \cdot \lVert \nabla \mathcal{L}_{N_{\text{warmup}}}\rVert_2$ | Adaptive |
+| Warm-up steps $N_{\text{warmup}}$ | `1 epoch` | GBG warm-up |
+| Perturbation layer | `10` | "Semantic-Entry" layer |
+| Inner-loop steps | `4` | From our ablation study |
 
 ## 📊 Method Details
 
 ### Adaptive Orthogonality (AO)
 
-AO mitigates collateral damage by penalizing the cosine similarity between forget gradients ($g_f$) and retain gradients ($g_r$) only when they conflict ($g_f \cdot g_r < 0$).
+AO suppresses collateral damage by penalizing the cosine similarity between the **forget gradient** $g_f$ and the **retain gradient** $g_r$ **only when they conflict** (i.e., $g_f \cdot g_r < 0$):
 
-$$\mathcal{R}_{AO} = \mathbb{I}(g_f \cdot g_r < 0) \left(\frac{1 - \cos(g_f, g_r)}{2}\right)^\gamma$$
+$$
+\mathcal{R}_{AO} \;=\; \mathbb{I}\bigl(g_f \cdot g_r < 0\bigr) \left(\frac{1 - \cos(g_f, g_r)}{2}\right)^{\gamma}
+$$
 
 ### Adversarial Gating Training (AGT)
 
-AGT formulates unlearning as a bi-level optimization problem to defend against latent perturbations $\delta$
+AGT casts unlearning as a **bi-level (min-max) optimization** that defends against latent perturbations $\delta$ at the semantic-entry layer:
 
-$$\min_{\theta} \max_{||\delta||_p \le \epsilon} (\mathcal{L}_{unlearn}(h_f^{(l)} + \delta,h_{r};\theta))$$
+$$
+\min_{\theta}\;\max_{\lVert\delta\rVert_p \le \epsilon}\;\mathcal{L}_{\text{unlearn}}\bigl(h_f^{(l)} + \delta,\, h_r;\, \theta\bigr)
+$$
+
+This jointly enforces *deep erasure* of the forget set and *robustness* against adversarial probes, while AO and GBG keep training stable and utility-preserving.
 
 ## 🧪 Experimental Results
 
-### TOFU Benchmark (Llama-2-7b-chat)
+### TOFU Benchmark — *Llama-2-7b-chat*
 
-Comparison of $AGT^{AO}$ against baselines (GA, NPO, SimNPO, LAT, PGU).
+We compare $AGT^{AO}$ against strong baselines: **GA**, **NPO**, **SimNPO**, **PGU**, **RMU**, and **LAT**.
 
-# Main Results of the TOFU Benchmark Test（Llama-2-7B-chat）
-Note: The results are the average of three evaluations. ↑ indicates that the higher the value, the better; ↓ indicates that the lower the value, the better; →0.5 indicates that the closer to 0.5, the more ideal. The bold text represents the optimal result, and the underlined text represents the sub-optimal result.
+> **Reading the table.** Results are averaged over **3 runs**.
+> ↑ higher is better &nbsp;·&nbsp; ↓ lower is better &nbsp;·&nbsp; →0.5 closer to 0.5 is more ideal.
+> **Bold** = best &nbsp;·&nbsp; <u>underline</u> = second best.
 
-| method       | Forget quality ↑ | KUR ↓       | Model utility ↑ | fluency ↑ | PLR →0.5 |
-|--------------|-----------------------------|------------|----------------------------|-------------------|-----------------------|
-| target       | -46.91                      | 0.91       | 0.59                       | 0.87              | 0.98                  |
-| retrain      | 0.00                        | 0.29       | 0.58                       | 0.91              | 0.47                  |
-| GA           | -50.29                      | 0.48       | 0.00                       | 0.00              | 0.45                  |
-| GA_GDR       | -51.16                      | 1.44       | 0.51                       | 0.27              | 0.08                  |
-| GA_KLR       | -31.85                      | 0.69       | 0.00                       | 0.29              | 0.59                  |
-| NPO          | -19.78                      | 0.30       | 0.00                       | 0.02              | 0.40                  |
-| NPO_GDR      | -13.80                      | 0.20       | 0.53                       | 0.16              | 0.19                  |
-| NPO_KLR      | -30.51                      | 0.38       | 0.45                       | 0.89              | 0.81                  |
-| SimNPO_GDR   | -13.96                      | 0.20       | 0.52                       | 0.21              | 0.18                  |
-| PGU          | -15.39                      | 0.23       | 0.47                       | 0.83              | 0.55                  |
-| RMU          | -14.20                      | 0.14       | 0.45                       | 0.76              | 0.59                  |
-| LAT          | -12.50                      | 0.05       | 0.41                       | 0.70              | 0.55                  |
-| **$AGT^{AO}$**      | **-9.43**                   | **0.01**   | **0.59**                   | **0.90**          | **0.53**              |
+| Method            | Forget Quality ↑ | KUR ↓     | Model Utility ↑ | Fluency ↑ | PLR →0.5 |
+|:------------------|:----------------:|:---------:|:---------------:|:---------:|:--------:|
+| Target            | −46.91           | 0.91      | 0.59            | 0.87      | 0.98     |
+| Retrain (oracle)  | 0.00             | 0.29      | 0.58            | 0.91      | 0.47     |
+| GA                | −50.29           | 0.48      | 0.00            | 0.00      | 0.45     |
+| GA + GDR          | −51.16           | 1.44      | 0.51            | 0.27      | 0.08     |
+| GA + KLR          | −31.85           | 0.69      | 0.00            | 0.29      | 0.59     |
+| NPO               | −19.78           | 0.30      | 0.00            | 0.02      | 0.40     |
+| NPO + GDR         | −13.80           | 0.20      | 0.53            | 0.16      | 0.19     |
+| NPO + KLR         | −30.51           | 0.38      | 0.45            | <u>0.89</u> | 0.81   |
+| SimNPO + GDR      | −13.96           | 0.20      | 0.52            | 0.21      | 0.18     |
+| PGU               | −15.39           | 0.23      | 0.47            | 0.83      | <u>0.55</u> |
+| RMU               | −14.20           | 0.14      | 0.45            | 0.76      | 0.59     |
+| LAT               | <u>−12.50</u>    | <u>0.05</u> | 0.41          | 0.70      | <u>0.55</u> |
+| **$AGT^{AO}$ (Ours)** | **−9.43**    | **0.01**  | **0.59**        | **0.90**  | **0.53** |
 
-### 补充说明
-- The evaluation dimensions include three categories: forgetting effect (forgetting quality, Knowledge Unlearning Ratio - KUR), utility and quality (model utility, fluency), and privacy (Privacy Leakage Rate - PLR).
-- The composition and details of the sub-indicators of KUR and PLR can be found in the appendix of the paper.
-- Note: $AGT^{AO}$ achieves the best balance between unlearning efficacy and utility, with a Privacy Leakage Ratio (PLR) close to the ideal 0.5.
+#### Notes
 
-## 📝 Citation
+- **Evaluation axes.** We report (i) *forgetting* via **Forget Quality** and **Knowledge Unlearning Ratio (KUR)**, (ii) *utility & quality* via **Model Utility** and **Fluency**, and (iii) *privacy* via **Privacy Leakage Rate (PLR)**.
+- **Sub-metrics.** Composition and definitions of KUR and PLR sub-indicators are detailed in the paper appendix.
+- **Takeaway.** $AGT^{AO}$ delivers the **best forgetting–utility trade-off**, with a PLR close to the ideal value of **0.5**, indicating that the unlearned model behaves statistically indistinguishably from a model that never saw the forget set.
 
-If you find this code useful, please cite our paper:
+## 📁 Repository Structure
+
+```text
+AGT-unlearning/
+├── baselines/      # Unlearning methods (AGT, GA, NPO, SimNPO, PGU, RMU, LAT, ...)
+├── evals/          # Evaluation pipelines for TOFU / MUSE / WMDP
+├── arc.png         # Figure 1: framework overview
+├── GBG.png         # Figure 2: gradient-norm-based gating
+├── LICENSE         # MIT license
+└── README.md
+```
+
+## ✍️ Citation
+
+If you find our work useful, please consider citing:
 
 ```bibtex
-@inproceedings{li2026agt,
-  title={$AGT^{AO}$: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality},
-  author={Li, Pengyu and Zhang, Lingling and Gao, Zhitao and Wei, Bifan and Liu, Jun and Wu, Yaqiang},
-  booktitle={Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL)},
+@article{li2026textbf,
+  title={{\textbf{AGT$^{AO}$}}: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality},
+  author={Li, Pengyu and Zhang, Lingling and Gao, Zhitao and Wu, Yanrui and Dong, Yuxuan and Liu, Huan and Wei, Bifan and Liu, Jun},
+  journal={arXiv preprint arXiv:2602.01703},
   year={2026}
 }
 ```
 
 ## 🙏 Acknowledgements
 
-Our code builds upon the following repositories:
+This codebase builds upon several outstanding open-source projects. We sincerely thank their authors:
 
-  * [TOFU: A Task of Fictitious Unlearning](https://github.com/locuslab/tofu) 
-  * [MUSE](https://github.com/locuslab/tofu) 
-  * [WMDP Benchmark](https://github.com/centerforaisafety/wmdp) 
+- [**TOFU**](https://github.com/locuslab/tofu) — A Task of Fictitious Unlearning.
+- [**MUSE**](https://github.com/swj0419/muse_bench) — Machine Unlearning Six-way Evaluation.
+- [**WMDP**](https://github.com/centerforaisafety/wmdp) — Weapons of Mass Destruction Proxy benchmark.
 
------
+We also thank the broader LLM-unlearning community for fruitful discussions and feedback.
 
-*Disclaimer: This repository is for research purposes only.*
+## 📜 License
+
+This project is released under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+  <sub>⚠️ <em>Disclaimer: This repository is intended for academic research purposes only.</em></sub><br>
+  <sub>Made with ❤️ for safer and more trustworthy LLMs.</sub>
+</div>
