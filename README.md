@@ -149,10 +149,18 @@ python baselines/unlearn.py \
 | Learning rate | `1e-4` | AdamW |
 | Batch size | `1` (× 8 grad-accum) | Effective batch = 8 |
 | AO parameter $\gamma$ | `1` | Cosine-conflict exponent |
-| Gradient threshold $\tau_{\text{grad}}$ | $\rho \cdot \lVert \nabla \mathcal{L}_{N_{\text{warmup}}}\rVert_2$ | Adaptive |
+| Gradient threshold $\tau_{\text{grad}}$ | Adaptive (see below) | Used by GBG |
 | Warm-up steps $N_{\text{warmup}}$ | `1 epoch` | GBG warm-up |
 | Perturbation layer | `10` | "Semantic-Entry" layer |
 | Inner-loop steps | `4` | From our ablation study |
+
+The adaptive gradient threshold $\tau_{\text{grad}}$ is computed at the end of the warm-up phase as:
+
+$$
+\tau_{\text{grad}} \;=\; \rho \cdot \bigl\Vert \nabla \mathcal{L}_{N_{\text{warmup}}} \bigr\Vert_{2}
+$$
+
+where $\rho$ is a scaling factor and $\nabla \mathcal{L}_{N_{\text{warmup}}}$ denotes the loss gradient at the final warm-up step.
 
 ## 📊 Method Details
 
