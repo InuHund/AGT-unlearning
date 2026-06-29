@@ -1,0 +1,7 @@
+transformers>=4.30.0
+peft>=0.4.0
+datasets
+accelerate
+scipy
+hydra-core   # configuration management
+wandb        # experiment logging
