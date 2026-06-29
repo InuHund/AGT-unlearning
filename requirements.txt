@@ -3,5 +3,7 @@ peft>=0.4.0
 datasets
 accelerate
 scipy
-hydra-core   # configuration management
-wandb        # experiment logging
+scikit-learn
+deepspeed
+hydra-core
+wandb
